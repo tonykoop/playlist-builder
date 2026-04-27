@@ -14,7 +14,7 @@ Started as a yoga-class playlist tool I use every week. Generalizing to other co
 
 ## What it does today
 
-The `yoga-playlist-builder` skill (runs as a [Cowork](https://www.anthropic.com) plugin / Claude Agent SDK skill) generates a 65-minute vinyasa class playlist mapped to a 6-phase energy arc:
+The [`yoga-playlist-builder`](./skills/yoga-playlist-builder/) skill (runs as a [Cowork](https://www.anthropic.com) plugin / Claude Agent SDK skill) generates a 65-minute vinyasa class playlist mapped to a 6-phase energy arc:
 
 ```
 Opening (A) → Rising (B) → Peak (D) → Theme Anchor (C) → Descent (E) → Closing (A)
