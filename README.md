@@ -8,7 +8,11 @@ Started as a yoga-class playlist tool I use every week. Generalizing to other co
 
 ## Status
 
-**v0.1** — yoga + SoundCloud only. Mature and used in production by the author. Multi-context and multi-platform expansion is the next milestone (see [#1](../../issues/1)).
+**v0.1** — yoga + SoundCloud, mature and used in production by the author. See [`skills/yoga-playlist-builder/`](./skills/yoga-playlist-builder/).
+
+**v0.2 (in progress)** — generalized to multi-context (Power Vinyasa, Sustained Power Flow, Sculpt, Restorative, Spa, Spin, Party), multi-platform (SoundCloud + Spotify), and multi-catalog (your library, seed banks, or a custom xlsx). See [`skills/playlist-builder/`](./skills/playlist-builder/) and the architecture sketch in [`DESIGN.md`](./DESIGN.md). Scaffolded — not yet runnable end-to-end. Non-developer install path: [`INSTALL.md`](./INSTALL.md).
+
+Example output: a power-vinyasa playlist built around the yama *aparigraha* (non-attachment) lives at [`examples/playlist_37_aparigraha_demo.md`](./examples/playlist_37_aparigraha_demo.md).
 
 ---
 
@@ -49,14 +53,31 @@ A fourth piece — **theme matching** — picks the C-bank track whose lyrics be
 
 ---
 
-## How to use it
+## How to install
 
-1. Open Cowork, install the `yoga-playlist-builder` skill.
-2. Ask: *"Create playlist 43 about surrender"* or *"Build a yoga playlist with lyrics about letting go."*
-3. Review the generated tracklist (you can iterate — swap tracks, adjust the C-bank pick, etc.).
-4. Optionally have the skill create the SoundCloud playlist for you. Chrome must be open and logged in to soundcloud.com — the skill drives the UI directly.
+Pick the path that matches your AI agent. From easiest to most-fiddly:
 
-If you create playlists outside the tool, pass `--exclude-urls` with those track URLs so they're added to the exclusion set.
+### Path A — chat-only (ChatGPT, Claude on the web, mobile chatbot)
+No filesystem? No problem. Open [`BOOTSTRAP.md`](./BOOTSTRAP.md), copy the entire contents, and paste it as the first message in a fresh chat with your AI agent. The agent will then behave like the playlist-builder skill for that conversation. You'll need to re-paste in each new chat.
+
+### Path B — Claude Desktop / Cowork mode
+1. Click the green **Code** button at the top of this repo, then **Download ZIP**.
+2. Unzip it. Find the `skills/playlist-builder/` folder inside.
+3. Move that folder into Claude's skills directory:
+   - **macOS:** `~/Library/Application Support/Claude/skills/`
+   - **Windows:** `%APPDATA%\Claude\skills\`
+4. Restart Claude Desktop. Open a new chat and say *"Build me a yoga playlist."*
+
+### Path C — Claude Code, Cursor, or any agent with a terminal
+```bash
+git clone https://github.com/tonykoop/playlist-builder
+cp -r playlist-builder/skills/playlist-builder ~/.claude/skills/
+```
+Restart your agent. Done.
+
+Once installed, ask: *"Create playlist 43 about surrender"* or *"Build a 60-minute power vinyasa playlist with lyrics about letting go."* Review the tracklist; iterate; have the skill create the SoundCloud playlist via browser automation if Chrome is logged in to soundcloud.com.
+
+For non-developer install details and troubleshooting, see [`INSTALL.md`](./INSTALL.md).
 
 ---
 
