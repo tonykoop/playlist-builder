@@ -18,6 +18,32 @@ The generator (`scripts/generate_playlist.py`) consumes a categorized catalog JS
 }
 ```
 
+## Tony Mode B bank-reference snapshot
+
+When Tony's public bank documentation is available but no categorized track
+snapshot has been exported, the skill uses a lighter machine-readable reference:
+
+```jsonc
+{
+  "schema_version": 1,
+  "source": "tony-koop-public-mode-b",
+  "snapshot_kind": "bank-reference",
+  "verified_track_snapshot_available": false,
+  "banks": {
+    "A": {
+      "playlist_name": "A Bank: First & Last",
+      "role": "Opening and closing, ambient, no-percussion",
+      "public_playlist_url": "https://soundcloud.com/tonykoop",
+      "tracks": []
+    }
+  }
+}
+```
+
+This reference is enough for `bank-scaffold` output. It is not enough for an
+exact playlist or a search-assisted tracklist with named rows. To upgrade it,
+populate each bank's `tracks` array with the `Track` schema above.
+
 Where `Track` is:
 
 ```jsonc
