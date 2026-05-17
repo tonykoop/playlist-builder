@@ -20,9 +20,12 @@ The five banks are public playlists:
 
 When a user picks "Tony Koop's public catalog" in the intake form, the skill:
 
-1. Pulls the latest snapshot of Tony's banks from SoundCloud (manually, by reading `references/TonyKoop_Yoga_Playlists.xlsx` if available, or by scraping the public playlist pages).
-2. Treats those tracks as the user's starting catalog (Mode B).
-3. Maintains a separate exclusion file per user (each trainee has their own "what I've used" set, distinct from Tony's).
+1. Checks whether a concrete, machine-readable Mode B track snapshot is available.
+2. If concrete tracks exist, treats those tracks as the user's starting catalog (Mode B) and emits `search-assisted` output with row-level certainty.
+3. If only bank metadata/documentation exists, emits `bank-scaffold` output: phase slots, bank roles, search strings, and verification instructions, but no named track claims.
+4. Maintains a separate exclusion file per user (each trainee has their own "what I've used" set, distinct from Tony's).
+
+The machine-readable bank-reference path is `references/tony-mode-b-snapshot.json`. It is intentionally documentation-only until a categorized track export is available.
 
 ## How to mirror to Spotify
 
@@ -46,3 +49,4 @@ This isn't a license requirement — it's good karma.
 
 - Tony's banks are **not** auto-categorized by Spotify audio-features — they're hand-curated. The bank assignments reflect Tony's taste and class style. Trainees with very different taste profiles may want to use Tony's catalog as inspiration / reference rather than as their primary source.
 - The catalog continues to grow as Tony teaches new classes. The xlsx in `references/TonyKoop_Yoga_Playlists.xlsx` is a snapshot — refresh periodically.
+- A public bank reference is not the same as a verified track snapshot. Do not mark Mode B rows as `verified` unless the local JSON contains concrete platform IDs or the platform lookup has been run.

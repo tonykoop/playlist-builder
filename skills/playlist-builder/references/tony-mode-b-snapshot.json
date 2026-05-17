@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "source": "tony-koop-public-mode-b",
+  "snapshot_kind": "bank-reference",
+  "snapshot_date": "2026-05-10",
+  "verified_track_snapshot_available": false,
+  "notes": "Machine-readable Mode B bank reference. This file intentionally contains bank metadata and public playlist pointers, not a concrete track snapshot. Use it for bank-scaffold output until a categorized track export is available.",
+  "attribution": "Catalog seeded from Tony Koop's vinyasa banks, github.com/tonykoop/playlist-builder",
+  "banks": {
+    "A": {
+      "playlist_name": "A Bank: First & Last",
+      "role": "Opening and closing, ambient, no-percussion",
+      "public_playlist_url": "https://soundcloud.com/tonykoop",
+      "tracks": []
+    },
+    "B": {
+      "playlist_name": "B Bank: Rising Energy",
+      "role": "Warmup, building, progressive house and melodic electronica",
+      "public_playlist_url": "https://soundcloud.com/tonykoop",
+      "tracks": []
+    },
+    "C": {
+      "playlist_name": "C Bank: Theme Anchor",
+      "role": "Lyrics-prominent tracks for class themes",
+      "public_playlist_url": "https://soundcloud.com/tonykoop",
+      "tracks": []
+    },
+    "D": {
+      "playlist_name": "Song Bank: High Energy - 15th-40th Minute",
+      "role": "Peak, house, dance, EDM",
+      "public_playlist_url": "https://soundcloud.com/tonykoop",
+      "tracks": []
+    },
+    "E": {
+      "playlist_name": "E Bank: Descending Energy",
+      "role": "Cooldown, downtempo, melodic",
+      "public_playlist_url": "https://soundcloud.com/tonykoop",
+      "tracks": []
+    }
+  }
+}

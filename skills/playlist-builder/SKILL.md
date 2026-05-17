@@ -70,6 +70,11 @@ Read tracks via the Claude Spotify connector, then auto-categorize into A–E us
 ### Mode B — Tony Koop's hand-curated catalog (public, opt-in)
 Tony's vinyasa catalog (~1,130 tracks across 5 banks A/B/C/D/E) is shareable for teacher-trainee use. Trainees can use it as their starting library while they grow their own. See `references/CATALOG_TONY_KOOP.md`. Attribute as "catalog by Tony Koop, github.com/tonykoop".
 
+Mode B now has two distinct local states:
+
+- **Concrete snapshot available:** a machine-readable categorized JSON contains tracks. Use `search-assisted` output and mark each row's exact-ID certainty.
+- **Documentation/bank reference only:** `references/tony-mode-b-snapshot.json` or `CATALOG_TONY_KOOP.md` identifies the banks, but no concrete track list is available locally. Use `bank-scaffold` output. Do not emit named track claims.
+
 ### Mode C — seed banks (no user library)
 The skill ships with public-domain / streaming-licensed seed banks in `seed-banks/`. Small (~30 tracks/bank) but enough for 8–10 classes before exclusion runs out.
 
@@ -81,16 +86,45 @@ There is no SoundCloud MCP connector and no dedicated cross-platform migration M
 
 ## Step 4 — generate the tracklist
 
+First inspect local catalog/auth state:
+
+```bash
+python <skill-path>/scripts/inspect_catalog.py \
+    --skill-dir <skill-path> \
+    [--catalog <path-to-categorized-catalog.json>]
+```
+
+The preflight recommends one of:
+
+- `verified`: exact playlist rows are justified by auth or verified IDs.
+- `search-assisted`: a concrete catalog exists, but rows may still need verification.
+- `bank-scaffold`: only bank metadata/docs are available; emit slots and search strings, not track claims.
+- `sparse`: only a few verified seed tracks exist.
+- `manual-curation`: no useful local catalog/auth state exists.
+
 ```bash
 python <skill-path>/scripts/generate_playlist.py \
     --context <skill-path>/contexts/yoga-power.json \
     --catalog <path-to-categorized-catalog.json> \
+    --catalog-state auto \
     --theme "aparigraha letting go non-attachment" \
     --number 37 \
     --output playlist.md
 ```
 
-The output markdown includes a copy-paste-ready **description block**, **suggested tags**, the tracklist with energy arc, SoundCloud links, and Spotify URIs for bulk-add.
+When no concrete catalog is available but Mode B bank references exist, generate a scaffold instead:
+
+```bash
+python <skill-path>/scripts/generate_playlist.py \
+    --context <skill-path>/contexts/yoga-power.json \
+    --skill-dir <skill-path> \
+    --catalog-state bank-scaffold \
+    --include-example-candidates \
+    --theme "aparigraha letting go non-attachment" \
+    --output playlist-bank-scaffold.md
+```
+
+The output markdown includes a copy-paste-ready **description block**, **suggested tags**, and either a tracklist with row-level certainty or a bank scaffold with verification instructions. See `references/HONESTY_MODES.md`.
 
 ## Step 5 — create the playlist on the chosen platform
 
